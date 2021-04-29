@@ -13,3 +13,11 @@ setInterval(() => {
 setTimeout(() => {
     console.log(HelloFunc.name)
 },5000)
+
+
+/*
+Three type of modules
+1/ Local module
+2/ Global module
+3/3rd party module
+*/
