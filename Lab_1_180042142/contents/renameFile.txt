@@ -1,0 +1,2 @@
+We are learning node js 
+We are learning javascriptIs this a synchronus process?Is this a synchronus process?
