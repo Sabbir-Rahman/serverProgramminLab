@@ -2,5 +2,8 @@ const Hello = ()=> {
     console.log('Hello World!')
 }
 
-module.exports = {HelloFunction:Hello}
+const name = "Md Sabbir Rahman"
+
+module.exports = {HelloFunction:Hello,name}
+
 

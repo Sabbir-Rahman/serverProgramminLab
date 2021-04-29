@@ -4,3 +4,5 @@
 const HelloFunc = require("./helloWorld")
 
 HelloFunc.HelloFunction()
+
+console.log(HelloFunc.name)
