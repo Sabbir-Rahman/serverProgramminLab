@@ -1,14 +1,17 @@
 const express = require('express')
 const router = express.Router()
+const bodyParser = require("body-parser");
 
-const {getRegister,postRegister,getLogin,getDashboard,getLandingPage} = require('../controllers/authController')
+const {getRegister,postRegister,getLogin,getDashboard,getLandingPage,postLogin} = require('../controllers/authController')
 
 const pageNotFound = require('../controllers/generalController')
 
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
 
 router.get('/',getLandingPage)
 
-router.get('/login',getLogin)
+router.route('/login').get(getLogin).post(postLogin)
 
 router.route('/register').get(getRegister).post(postRegister)
 
