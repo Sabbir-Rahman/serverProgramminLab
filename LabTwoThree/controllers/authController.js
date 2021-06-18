@@ -1,9 +1,23 @@
+const userSchema = require('../model/userModel')
+
 const getRegister = (req,res) => {
     res.sendFile("register.html", { root: "./views/templates/AdminLTE-master/pages/examples" })
 }
 
-const postRegister = (req,res) => {
+const postRegister = async (req,res) => {
     //fullname,email,pass,confpass
+    const {fullname,email,password,confpassword} = req.body
+
+    const newUser = {fullname:fullname, email:email,password:password}
+    console.log(newUser)
+
+    try{
+        await new userSchema(newUser).save()
+        console.log('New User created')
+        res.status(201).json({newUser})
+    } catch (error){
+        res.status(409).json({message: error.message})
+    }
     
 }
 
