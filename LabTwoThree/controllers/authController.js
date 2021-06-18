@@ -48,8 +48,7 @@ const postRegister = async (req,res) => {
 const getLogin = (req,res) => {
     res.sendFile("login.html", { root: "./views/templates/AdminLTE-master/pages/examples" })
     
-    //localStorage.removeItem('fullname')
-    console.log(localStorage.getItem('fullname'));
+    
 }
 
 const postLogin = (req,res) => {
