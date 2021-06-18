@@ -30,6 +30,7 @@ const postRegister = async (req,res) => {
                 await new userSchema(newUser).save()
                 localStorage.setItem('fullname',fullname)
                 alert("User Add Succesfully")
+                res.redirect('/dashboard')
                 //res.status(201).json({message:'New user created', data:newUser}).redirect('/')
             } catch (error){
                 res.status(409).json({message: error.message})
