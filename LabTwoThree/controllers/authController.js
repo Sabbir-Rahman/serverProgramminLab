@@ -5,7 +5,11 @@ const alert = require('alert');
 var LocalStorage = require('node-localstorage').LocalStorage;
 const { request } = require('express');
 localStorage = new LocalStorage('./scratch');
-
+let express = require('express');
+let cookieParser = require('cookie-parser');
+//setup express app
+const app = express()
+app.use(cookieParser())
 
 const getRegister = (req,res) => {
     res.sendFile("register.html", { root: "./views/templates/AdminLTE-master/pages/examples" })
@@ -19,7 +23,9 @@ const postRegister = async (req,res) => {
     if(password === confpassword){
 
         if(String(password).length <8){
-            res.status(400).json({message: 'Password must be atleast 8 charecters'})
+            alert('Password must be atleast 8 charecters')
+            res.redirect('/register')
+            //res.status(400).json({message: 'Password must be atleast 8 charecters'})
             
         }else {
             const hashPassword = bcrypt.hashSync(password, saltRounds);
@@ -38,7 +44,9 @@ const postRegister = async (req,res) => {
     
         }
     }else{
-        res.status(400).json({message: 'Password and conf pass not match'})
+        alert('Password and retype pass not match')
+        res.redirect('register')
+        //res.status(400).json({message: 'Password and conf pass not match'})
     }
     
 
@@ -52,8 +60,47 @@ const getLogin = (req,res) => {
     
 }
 
-const postLogin = (req,res) => {
-    console.log(req.body)
+const postLogin = async (req,res) => {
+    const {email, password} = req.body
+
+    if(String(email).length>0){
+        const user = await userSchema.findOne({
+            email: email
+        })
+        if(user){
+            passwordMatch = bcrypt.compareSync(password, user.password)
+            if(passwordMatch){
+                localStorage.setItem('fullname',user.fullname)
+                alert("Login succesfull")
+                res.redirect('/dashboard')
+                
+            }
+            else{
+                alert("Wrong Password")
+                res.redirect('/login')
+                //res.status(400).json({message: 'Password not match'})
+            }
+        } else{
+            
+            alert("No user with this email please register")
+            res.redirect('/login')
+            //res.status(400).json({message: 'No user exist with this email please signup'})
+        }
+    }else {
+        
+        alert("Please input email")
+        res.redirect('/login')
+        //res.status(400).json({message: 'Please input email'})
+    }
+    
+    
+    
+}
+
+const logout = (req,res)=> {
+    res.clearCookie('user');
+    localStorage.removeItem("fullname")
+    res.redirect('/')
 }
 
 const getDashboard = (req,res) => {
@@ -66,5 +113,5 @@ const getLandingPage = (req,res) => {
 }
 
 module.exports = {
-    getRegister,postRegister,getLogin,getDashboard,getLandingPage,postLogin
+    getRegister,postRegister,getLogin,getDashboard,getLandingPage,postLogin,logout
 }
