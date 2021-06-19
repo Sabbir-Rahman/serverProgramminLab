@@ -93,6 +93,11 @@ const postLogin = async (req,res) => {
     
 }
 
+const logout = (req,res)=> {
+    localStorage.removeItem("fullname")
+    res.redirect('/')
+}
+
 const getDashboard = (req,res) => {
 
     res.sendFile("index.html", { root: "./views/templates/AdminLTE-master" });    
@@ -103,5 +108,5 @@ const getLandingPage = (req,res) => {
 }
 
 module.exports = {
-    getRegister,postRegister,getLogin,getDashboard,getLandingPage,postLogin
+    getRegister,postRegister,getLogin,getDashboard,getLandingPage,postLogin,logout
 }
