@@ -15,7 +15,7 @@ const isLoggedIn = (req,res,next) => {
     const user = localStorage.getItem("fullname")
     
     if (user){
-        res.clearCookie(user);
+        res.clearCookie('user');
         res.cookie("user", user);
         alert(`Welcome ${user}`)
         next()

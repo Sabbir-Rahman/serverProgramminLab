@@ -5,7 +5,11 @@ const alert = require('alert');
 var LocalStorage = require('node-localstorage').LocalStorage;
 const { request } = require('express');
 localStorage = new LocalStorage('./scratch');
-
+let express = require('express');
+let cookieParser = require('cookie-parser');
+//setup express app
+const app = express()
+app.use(cookieParser())
 
 const getRegister = (req,res) => {
     res.sendFile("register.html", { root: "./views/templates/AdminLTE-master/pages/examples" })
@@ -94,6 +98,7 @@ const postLogin = async (req,res) => {
 }
 
 const logout = (req,res)=> {
+    res.clearCookie('user');
     localStorage.removeItem("fullname")
     res.redirect('/')
 }
