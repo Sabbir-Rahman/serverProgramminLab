@@ -3,6 +3,10 @@ const app = express()
 const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
+const passport = require('passport')
+
+//Passport Strategy
+require('./config/passport')(passport)
 
 //using flash session
 const session = require('express-session')
@@ -40,7 +44,12 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 app.use(flash())
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 const indexRoutes = require('./routes/index.routes')
 const userRoutes = require('./routes/user.routes')
 
