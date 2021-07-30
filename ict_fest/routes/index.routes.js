@@ -9,7 +9,7 @@ router.get('/', (req,res)=> {
 })
 
 router.get("/dashboard",ensureAuthentication, (req, res) => {
-  res.render("dashboard.ejs");
+  res.render("dashboard.ejs",{user:req.user});
 });
 
 
