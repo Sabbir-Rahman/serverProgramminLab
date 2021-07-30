@@ -1,3 +1,6 @@
+const User = require('../models/User.model')
+const bcrypt = require('bcryptjs')
+
 const getLogin = (req,res) => {
     res.render('users/login.ejs')
 }
@@ -7,7 +10,7 @@ const postLogin = (req, res) => {
     const {email,password} = req.body
 };
 const getRegister = (req, res) => {
-    res.render('users/register.ejs')
+    res.render('users/register.ejs', {errors:req.flash('errors')})
 };
 const postRegister = (req, res) => {
     const {name,email,password,confPassword} = req.body
@@ -26,11 +29,50 @@ const postRegister = (req, res) => {
     }
 
     if(errors.length > 0){
-        console.log(errors)
+        req.flash("errors", errors)
         res.redirect("/users/register");
     }
     else{
-        res.redirect("/users/login")
+        //Create new user
+
+        User.findOne({email:email}).then((user)=>{
+            if(user){
+                errors.push("User already exist with this email")
+                req.flash("errors", errors)
+                res.redirect("/users/register")
+            }else{
+                bcrypt.genSalt(10, (err,salt)=>{
+                    if(err){
+                        errors.push(err)
+                        req.flash("errors", errors);
+                        res.redirect("/users/register");
+                    }else {
+                        bcrypt.hash(password,salt,(err,hash)=>{
+                            if(err){
+                                errors.push(err);
+                                req.flash("errors", errors);
+                                res.redirect("/users/register");
+                            }else {
+                                const newUser = new User({
+                                    name,email,password:hash
+                                })
+
+                                newUser
+                                .save()
+                                .then(()=> {
+                                    res.redirect("/users/login")
+                                }).catch(()=>{
+                                    errors.push("Saving user to database failed");
+                                    req.flash("errors", errors);
+                                    res.redirect("/users/register");
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+        // res.redirect("/users/login")
     }
 
 };
