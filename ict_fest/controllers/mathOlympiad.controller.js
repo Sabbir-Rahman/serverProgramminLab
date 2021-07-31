@@ -1,5 +1,6 @@
 //getRegisterMO,postRegisterMO,getListMO,deleteMO
 
+const MathOlympiad = require('../models/MathOlympiad.model')
 const getRegisterMO = (req, res) => {
     res.render("mathOlympiad/register.ejs")
 }

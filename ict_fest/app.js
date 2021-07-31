@@ -13,6 +13,7 @@ const session = require('express-session')
 const flash = require('connect-flash')
 
 
+
 //mongodb connect
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
@@ -52,9 +53,11 @@ app.use(passport.session())
 
 const indexRoutes = require('./routes/index.routes')
 const userRoutes = require('./routes/user.routes')
+const moRoutes = require('./routes/mathOlympiad.routes')
 
 app.use(indexRoutes)
 app.use("/users",userRoutes)
+app.use("/math_olympiad",moRoutes)
 
 
 module.exports = app
