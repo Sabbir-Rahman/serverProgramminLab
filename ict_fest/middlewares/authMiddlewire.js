@@ -7,4 +7,12 @@ const ensureAuthentication=(req,res,next)=>{
     }
 }
 
-module.exports = ensureAuthentication
+const addUserData = (req,res,next) => {
+    res.locals.req = req
+    res.locals.res = res
+    next()
+}
+
+
+
+module.exports = {ensureAuthentication, addUserData}
