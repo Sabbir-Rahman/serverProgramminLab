@@ -6,7 +6,8 @@ const getRegisterMO = (req, res) => {
 }
 
 const postRegisterMO = (req,res) => {
-    res.render("mathOlympiad/register.ejs");
+    console.log(req.body)
+    const { name,email,contact,institution,category,tshirt} = req.body
 }
 
 const getListMO = (req,res) => {
