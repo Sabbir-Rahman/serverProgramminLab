@@ -2,7 +2,7 @@
 
 const MathOlympiad = require("../models/MathOlympiad.model");
 const getRegisterMO = (req, res) => {
-  res.render("mathOlympiad/register.ejs", { message: req.flash("message")});
+  res.render("mathOlympiad/register.ejs", { message: req.flash("message") });
 };
 
 const postRegisterMO = (req, res) => {
@@ -27,7 +27,7 @@ const postRegisterMO = (req, res) => {
     if (participant) {
       message = "Participant with this name and contact number already exist";
       console.log(message);
-      req.flash("message",message)
+      req.flash("message", message);
       res.redirect("/math_olympiad/register");
     } else {
       const participant = new MathOlympiad({
@@ -44,56 +44,80 @@ const postRegisterMO = (req, res) => {
       participant
         .save()
         .then(() => {
-            message = 'Participants has been registered succesfully'
-            console.log(message)
-            req.flash("message", message);
-            res.redirect("/math_olympiad/register");
+          message = "Participants has been registered succesfully";
+          console.log(message);
+          req.flash("message", message);
+          res.redirect("/math_olympiad/register");
         })
         .catch(() => {
-            message = "Participant not registered";
-            console.log(message);
-            req.flash("message", message);
-            res.redirect("/math_olympiad/register");
+          message = "Participant not registered";
+          console.log(message);
+          req.flash("message", message);
+          res.redirect("/math_olympiad/register");
         });
     }
   });
 };
 
 const getListMO = (req, res) => {
-
-  let allParticipants = []
-  let message = ''
-  MathOlympiad.find().then((data)=>{
-    allParticipants = data
-    res.render("mathOlympiad/list.ejs", {
-      message: req.flash("message"),
-      participants: allParticipants
-    })
-  }).catch(()=>{
-      message = 'Failed to fetch data'
+  let allParticipants = [];
+  let message = "";
+  MathOlympiad.find()
+    .then((data) => {
+      allParticipants = data;
       res.render("mathOlympiad/list.ejs", {
         message: req.flash("message"),
         participants: allParticipants,
       });
-  })
- 
+    })
+    .catch(() => {
+      message = "Failed to fetch data";
+      res.render("mathOlympiad/list.ejs", {
+        message: req.flash("message"),
+        participants: allParticipants,
+      });
+    });
 };
 
 const deleteMO = (req, res) => {
-  let message = ''
+  let message = "";
   const id = req.params.id;
-  MathOlympiad.deleteOne({_id:id},(err)=>{
-    if(err){
-      message = 'Failed to delete data'
-      req.flash("message", message)
-      res.redirect("/math_olympiad/list")
+  MathOlympiad.deleteOne({ _id: id }, (err) => {
+    if (err) {
+      message = "Failed to delete data";
+      req.flash("message", message);
+      res.redirect("/math_olympiad/list");
     } else {
-      message = "Data has been deleted succesfully"
+      message = "Data has been deleted succesfully";
       req.flash("message", message);
       res.redirect("/math_olympiad/list");
     }
-  })
- 
+  });
 };
 
-module.exports = { getRegisterMO, postRegisterMO, getListMO, deleteMO };
+const paymentDoneMO = (req, res) => {
+  const id = req.params.id;
+
+  MathOlympiad.findOne({ _id: id }).then((participant) => {
+    const total = participant.total;
+    MathOlympiad.findOneAndUpdate({ _id: id }, { paid: total }, (err) => {
+      if (err) {
+        let message = "Data Could not been updated";
+        req.flash("message", message);
+        res.redirect("/math_olympiad/list");
+      } else {
+        let message = "Payment complete succesfully";
+        req.flash("message", message);
+        res.redirect("/math_olympiad/list");
+      }
+    });
+  });
+};
+
+module.exports = {
+  getRegisterMO,
+  postRegisterMO,
+  getListMO,
+  deleteMO,
+  paymentDoneMO,
+};
