@@ -15,8 +15,10 @@
         <br />
         <% let success = "Data has been deleted succesfully"%>
         <% let success2 = "Payment complete succesfully"%>
+        <% let success3 = "Participant selected succesfully"%>
         
-        <%if(message.length>0){if(message==success || message==success2){%>
+        
+        <%if(message.length>0){if(message==success || message==success2 || message==success3){%>
         <div class="alert alert-success"><%=message%></div>
         <%}else{%>
         <div class="alert alert-danger"><%=message%></div>
@@ -49,8 +51,8 @@
                     <th>Paid</th>
                     <th>Selected</th>
                     <th>Payment<br>Status</th>
-                    <th>Select</th>
                     <th>Payment<br>Done</th>
+                    <th>Select</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
@@ -67,7 +69,14 @@
                     <td><%= participant.tshirt %></td>
                     <td><%= participant.total %></td>
                     <td><%= participant.paid %></td>
-                    <td><%= participant.selected %></td>
+                    <td>
+                      <% if (participant.selected==true){%>
+                      <p style="color: green">Yes</p>
+                      <%}else{%>
+                      <p style="color: brown;">No</p>
+                      <%}%>
+                    </td>
+
                     <td>
                       <% if (participant.paid==participant.total){%>
                       <p style="color: green">Successful</p>
@@ -75,13 +84,22 @@
                       <p style="color: brown;">Incomplete</p>
                       <%}%>
                     </td>
-                    <td>Select</td>
-                    <td><% const paymentDoneURL = 'payment_done/' +
+
+                    <td>
+                      <% const paymentDoneURL = 'payment_done/' +
                       participant._id %>
                       <a href="<%= paymentDoneURL %>"
                         ><i class="fa fa-money"></i>
+                        <span class="fa fa-chevron"></span>
+                    </td>
+
+                    <td><% const selectParticipantURL = 'select_participant/' +
+                      participant._id %>
+                      <a href="<%= selectParticipantURL %>"
+                        ><i class="fa fa-check"></i>
                         <span class="fa fa-chevron"></span></td>
                     <td>Edit</td>
+
                     <td>
                       <% const deleteURL = 'delete/' +
                       participant._id %>

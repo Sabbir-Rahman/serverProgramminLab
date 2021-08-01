@@ -19,11 +19,13 @@ const flash = require('connect-flash')
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
 mongoose
-  .connect(CONNECTION_URL, { useNewUrlParser: true,useCreateIndex:true,useUnifiedTopology: true })
-  .then(() =>
-    
-      console.log(`Mongodb connected`)
-  )
+  .connect(CONNECTION_URL, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify:false,
+  })
+  .then(() => console.log(`Mongodb connected`))
   .catch((error) => console.log(error.message));
 
 //Static resources

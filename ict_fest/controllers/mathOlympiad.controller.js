@@ -114,10 +114,30 @@ const paymentDoneMO = (req, res) => {
   });
 };
 
+const selectParticipantMO = (req, res) => {
+  const id = req.params.id;
+
+  MathOlympiad.findOne({ _id: id }).then((participant) => {
+    
+    MathOlympiad.findOneAndUpdate({ _id: id }, { selected: true }, (err) => {
+      if (err) {
+        let message = "Data Could not been updated";
+        req.flash("message", message);
+        res.redirect("/math_olympiad/list");
+      } else {
+        let message = "Participant selected succesfully";
+        req.flash("message", message);
+        res.redirect("/math_olympiad/list");
+      }
+    });
+  });
+};
+
 module.exports = {
   getRegisterMO,
   postRegisterMO,
   getListMO,
   deleteMO,
   paymentDoneMO,
+  selectParticipantMO
 };
