@@ -60,7 +60,23 @@ const postRegisterMO = (req, res) => {
 };
 
 const getListMO = (req, res) => {
-  res.render("mathOlympiad/list.ejs");
+
+  let allParticipants = []
+  let message = ''
+  MathOlympiad.find().then((data)=>{
+    allParticipants = data
+    res.render("mathOlympiad/list.ejs", {
+      message: req.flash("message"),
+      participants: allParticipants
+    })
+  }).catch(()=>{
+      message = 'Failed to fetch data'
+      res.render("mathOlympiad/list.ejs", {
+        message: req.flash("message"),
+        participants: allParticipants,
+      });
+  })
+ 
 };
 
 const deleteMO = (req, res) => {
