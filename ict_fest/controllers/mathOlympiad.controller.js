@@ -2,7 +2,7 @@
 
 const MathOlympiad = require("../models/MathOlympiad.model");
 const getRegisterMO = (req, res) => {
-  res.render("mathOlympiad/register.ejs");
+  res.render("mathOlympiad/register.ejs", { message: req.flash("message")});
 };
 
 const postRegisterMO = (req, res) => {
@@ -27,6 +27,7 @@ const postRegisterMO = (req, res) => {
     if (participant) {
       message = "Participant with this name and contact number already exist";
       console.log(message);
+      req.flash("message",message)
       res.redirect("register");
     } else {
       const participant = new MathOlympiad({
@@ -45,11 +46,13 @@ const postRegisterMO = (req, res) => {
         .then(() => {
             message = 'Participants has been registered succesfully'
             console.log(message)
+            req.flash("message", message);
             res.redirect("register")
         })
         .catch(() => {
             message = "Participant not registered";
             console.log(message);
+            req.flash("message", message);
             res.redirect("register");
         });
     }
