@@ -28,7 +28,7 @@ const postRegisterMO = (req, res) => {
       message = "Participant with this name and contact number already exist";
       console.log(message);
       req.flash("message",message)
-      res.redirect("register");
+      res.redirect("/math_olympiad/register");
     } else {
       const participant = new MathOlympiad({
         name,
@@ -47,13 +47,13 @@ const postRegisterMO = (req, res) => {
             message = 'Participants has been registered succesfully'
             console.log(message)
             req.flash("message", message);
-            res.redirect("register")
+            res.redirect("/math_olympiad/register");
         })
         .catch(() => {
             message = "Participant not registered";
             console.log(message);
             req.flash("message", message);
-            res.redirect("register");
+            res.redirect("/math_olympiad/register");
         });
     }
   });
@@ -80,10 +80,20 @@ const getListMO = (req, res) => {
 };
 
 const deleteMO = (req, res) => {
+  let message = ''
   const id = req.params.id;
-
-  console.log(id);
-  res.render("mathOlympiad/list.ejs");
+  MathOlympiad.deleteOne({_id:id},(err)=>{
+    if(err){
+      message = 'Failed to delete data'
+      req.flash("message", message)
+      res.redirect("/math_olympiad/list")
+    } else {
+      message = "Data has been deleted succesfully"
+      req.flash("message", message);
+      res.redirect("/math_olympiad/list");
+    }
+  })
+ 
 };
 
 module.exports = { getRegisterMO, postRegisterMO, getListMO, deleteMO };
