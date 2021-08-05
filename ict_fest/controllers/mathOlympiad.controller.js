@@ -5,6 +5,16 @@ const getRegisterMO = (req, res) => {
   res.render("mathOlympiad/register.ejs", { message: req.flash("message") });
 };
 
+
+const getEditMO = (req, res) => {
+  res.render("mathOlympiad/edit.ejs");
+};
+
+const postEditMO = (req, res) => {
+  res.render("mathOlympiad/edit.ejs");
+};
+
+
 const postRegisterMO = (req, res) => {
   console.log(req.body);
   const { name, email, contact, institution, category, tshirt } = req.body;
@@ -139,5 +149,7 @@ module.exports = {
   getListMO,
   deleteMO,
   paymentDoneMO,
-  selectParticipantMO
+  selectParticipantMO,
+  getEditMO,
+  postEditMO
 };
