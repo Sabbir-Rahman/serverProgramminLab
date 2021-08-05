@@ -18,6 +18,12 @@ router.get("/edit/:id", ensureAuthentication, addUserData, editMO);
 router.get("/payment_done/:id", ensureAuthentication, addUserData, paymentDoneMO);
 router.get("/select_participant/:id", ensureAuthentication, addUserData, selectParticipantMO);
 router.get("/edit_participant_form", ensureAuthentication, addUserData, getEditMO);
+router.post(
+  "/edit_participant_form/:id",
+  ensureAuthentication,
+  addUserData,
+  postEditMO
+);
 
 module.exports = router
 

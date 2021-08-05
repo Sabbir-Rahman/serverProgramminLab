@@ -5,17 +5,36 @@ const getRegisterMO = (req, res) => {
   res.render("mathOlympiad/register.ejs", { message: req.flash("message") });
 };
 
-
 const getEditMO = (req, res) => {
   res.render("mathOlympiad/edit.ejs", {
     participant: req.flash("participant"),
-    message: req.flash("message")
+    message: req.flash("message"),
   });
 };
 
-const postEditMO = (req, res) => {
-  res.render("mathOlympiad/edit.ejs");
+const postEditMO = async (req, res) => {
+  let message = "";
+  const participant = req.body;
+  const {id:_id} = req.params
+
+  const updatedPost = await MathOlympiad.findByIdAndUpdate(
+    _id,
+    { ...participant, _id },
+    { new: true }
+  );
+  
+  if (updatedPost){
+    message = "Participant edit Succesfull";
+    req.flash("message", message);
+    res.redirect("/dashboard");
+  } else {
+    message = "Participant edit failed";
+    req.flash("message", message);
+    res.redirect("/dashboard");
+  }
+  
 };
+  // res.render("mathOlympiad/edit.ejs");
 
 
 const postRegisterMO = (req, res) => {
@@ -93,27 +112,24 @@ const getListMO = (req, res) => {
 };
 
 const editMO = (req, res) => {
-  
   let participant = {};
   let message = "";
   const id = req.params.id;
-  console.log(id)
+  console.log(id);
   MathOlympiad.findOne({ _id: id })
-  .then((data) => {
-    participant = data
-    message = "Data fetch success now edit participant";
-    req.flash("participant", participant);
-    req.flash("message", message);
-    res.redirect("/math_olympiad/edit_participant_form");
-  })
-  .catch((err) =>{
-    message = "Data fetch failed";
-    req.flash("message", message);
-    res.resnder('/dashboard')
-    console.log(err)
-  })
-  
-  
+    .then((data) => {
+      participant = data;
+      message = "Data fetch success now edit participant";
+      req.flash("participant", participant);
+      req.flash("message", message);
+      res.redirect("/math_olympiad/edit_participant_form");
+    })
+    .catch((err) => {
+      message = "Data fetch failed";
+      req.flash("message", message);
+      res.resnder("/dashboard");
+      console.log(err);
+    });
 };
 
 const deleteMO = (req, res) => {
@@ -155,7 +171,6 @@ const selectParticipantMO = (req, res) => {
   const id = req.params.id;
 
   MathOlympiad.findOne({ _id: id }).then((participant) => {
-    
     MathOlympiad.findOneAndUpdate({ _id: id }, { selected: true }, (err) => {
       if (err) {
         let message = "Data Could not been updated";
@@ -179,5 +194,5 @@ module.exports = {
   paymentDoneMO,
   selectParticipantMO,
   getEditMO,
-  postEditMO
+  postEditMO,
 };

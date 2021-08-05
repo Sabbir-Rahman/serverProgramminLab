@@ -8,7 +8,10 @@ router.get('/', (req,res)=> {
 })
 
 router.get("/dashboard",ensureAuthentication,addUserData, (req, res) => {
-  res.render("dashboard.ejs",{user:req.user});
+  res.render(
+    "dashboard.ejs",
+    { user: req.user, message: req.flash("message") }
+  );
 });
 
 

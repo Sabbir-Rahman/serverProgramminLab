@@ -14,16 +14,18 @@
         </div>
         <div class="x_content">
           <br />
-          <% console.log(participant[0]['name']) %>
+          
           <% let success = "Data fetch success now edit participant"%>
           <%if(message.length>0){if(message==success){%>
           <div class="alert alert-success"><%=message%></div>
           <%}else{%>
           <div class="alert alert-danger"><%=message%></div>
           <%}%> <%}%>
+          <% const URL = 'edit_participant_form/' +
+                      participant[0]['_id'] %>
           <form
             method="POST"
-            action="/math_olympiad/register"
+            action="<%= URL %>" 
             id="demo-form2"
             data-parsley-validate
             class="form-horizontal form-label-left"
@@ -99,7 +101,8 @@
                 />
               </div>
             </div>
-            <div class="item form-group">
+            <%if(participant[0]['paid']!=participant[0]['total']){%>
+              <div class="item form-group">
               <label
                 class="col-form-label col-md-3 col-sm-3 label-align"
                 for="category"
@@ -114,6 +117,8 @@
                 </select>
               </div>
             </div>
+            <%}%>
+            
             <div class="item form-group">
               <label
                 class="col-form-label col-md-3 col-sm-3 label-align"
@@ -126,7 +131,7 @@
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
-                  <option value="x">XL</option>
+                  <option value="xl">XL</option>
                   <option value="xxl">XXL</option>
                   <option value="xxxl">XXXL</option>
                 </select>
