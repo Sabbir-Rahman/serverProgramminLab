@@ -1,8 +1,10 @@
 //getRegisterPC,postRegisterPC,getListPC,deletePC
 
-const MathOlympiad = require("../models/MathOlympiad.model");
+const ProgrammingContest = require("../models/ProgrammingContest.model");
 const getRegisterPC = (req, res) => {
-  res.render("programmingContest/register.ejs", { message: req.flash("message") });
+  res.render("programmingContest/register.ejs", {
+    message: req.flash("message"),
+  });
 };
 
 const getEditPC = (req, res) => {
@@ -86,56 +88,99 @@ const postEditPC = async (req, res) => {
 
 const postRegisterPC = (req, res) => {
   console.log(req.body);
-//   const { name, email, contact, institution, category, tshirt } = req.body;
-//   let registrationFee = 0;
-//   if (category == "school") {
-//     registrationFee = 250;
-//   } else if (category == "college") {
-//     registrationFee = 400;
-//   } else if (category == "university") {
-//     registrationFee = 500;
-//   }
+  const {
+    team_name,
+    institution,
+    team_lead_name,
+    team_lead_email,
+    team_lead_contact,
+    team_lead_tshirt,
+    team_member2_name,
+    team_member2_email,
+    team_member2_contact,
+    team_member2_tshirt,
+    team_member3_name,
+    team_member3_email,
+    team_member3_contact,
+    team_member3_tshirt,
+    team_member4_name,
+    team_member4_email,
+    team_member4_contact,
+    team_member4_tshirt,
+    team_member5_name,
+    team_member5_email,
+    team_member5_contact,
+    team_member5_tshirt
+  } = req.body;
 
-//   const total = registrationFee;
-//   const paid = 0;
-//   const selected = false;
+  let registrationFee = 2000;
 
-//   let message = "";
+  const total = registrationFee;
+  const paid = 0;
+  const selected = false;
 
-//   MathOlympiad.findOne({ name: name, contact: contact }).then((participant) => {
-//     if (participant) {
-//       message = "Participant with this name and contact number already exist";
-//       console.log(message);
-//       req.flash("message", message);
-//       res.redirect("/math_olympiad/register");
-//     } else {
-//       const participant = new MathOlympiad({
-//         name,
-//         email,
-//         category,
-//         contact,
-//         institution,
-//         paid,
-//         total,
-//         selected,
-//         tshirt,
-//       });
-//       participant
-//         .save()
-//         .then(() => {
-//           message = "Participants has been registered succesfully";
-//           console.log(message);
-//           req.flash("message", message);
-//           res.redirect("/math_olympiad/register");
-//         })
-//         .catch(() => {
-//           message = "Participant not registered";
-//           console.log(message);
-//           req.flash("message", message);
-//           res.redirect("/math_olympiad/register");
-//         });
-//     }
-//   });
+  let message = "";
+  ProgrammingContest.findOne({
+    team_lead_email: {
+      $in: [team_lead_email, team_member2_email, team_member3_email]
+    },
+    team_member2_email: {
+      $in: [team_lead_email, team_member2_email, team_member3_email]
+    },
+    team_member3_email: {
+      $in: [team_lead_email, team_member2_email, team_member3_email]
+    },
+  }).then((participant) => {
+    console.log(participant)
+    if (participant) {
+      message = "Participant with this email already exist";
+      console.log(message);
+      req.flash("message", message);
+      res.redirect("/programming_contest/register");
+    } else {
+      const participant = new ProgrammingContest({
+        team_name,
+        institution,
+        team_lead_name,
+        team_lead_email,
+        team_lead_contact,
+        team_lead_tshirt,
+        team_member2_name,
+        team_member2_email,
+        team_member2_contact,
+        team_member2_tshirt,
+        team_member3_name,
+        team_member3_email,
+        team_member3_contact,
+        team_member3_tshirt,
+        team_member4_name,
+        team_member4_email,
+        team_member4_contact,
+        team_member4_tshirt,
+        team_member5_name,
+        team_member5_email,
+        team_member5_contact,
+        team_member5_tshirt,
+        total,
+        paid,
+        selected
+      });
+      participant
+        .save()
+        .then(() => {
+          message = "Participants has been registered succesfully";
+          console.log(message);
+          req.flash("message", message);
+          res.redirect("/programming_contest/register");
+        })
+        .catch((err) => {
+          message = "Participant not registered";
+          console.log(err);
+          req.flash("message", message);
+          res.redirect("/programming_contest/register");
+        });
+    }
+  });
 };
 
 const getListPC = (req, res) => {
