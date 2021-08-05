@@ -22,7 +22,7 @@
           <%}%> <%}%>
           <form
             method="POST"
-            action="/math_olympiad/register"
+            action="/programming_contest/register"
             id="demo-form2"
             data-parsley-validate
             class="form-horizontal form-label-left"
@@ -36,8 +36,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="team_name"
+                  name="team_name"
                   required="required"
                   class="form-control"
                 />
@@ -68,8 +68,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="team_lead_name"
+                  name="team_lead_name"
                   required="required"
                   class="form-control"
                 />
@@ -84,8 +84,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="email"
-                  id="email"
-                  name="email"
+                  id="team_lead_email"
+                  name="team_lead_email"
                   required="required"
                   class="form-control"
                 />
@@ -100,8 +100,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="contact"
-                  name="contact"
+                  id="team_lead_contact"
+                  name="team_lead_contact"
                   required="required"
                   class="form-control"
                 />
@@ -114,12 +114,12 @@
                 >Team Lead T-shirt<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="tshirt" name="tshirt">
+                <select class="form-control" id="team_lead_tshirt" name="team_lead_tshirt">
                   <option disabled>--- Choose option ---</option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
-                  <option value="x">XL</option>
+                  <option value="xl">XL</option>
                   <option value="xxl">XXL</option>
                   <option value="xxxl">XXXL</option>
                 </select>
@@ -135,8 +135,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="team_member2_name"
+                  name="team_member2_name"
                   required="required"
                   class="form-control"
                 />
@@ -151,8 +151,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="email"
-                  id="email"
-                  name="email"
+                  id="team_member2_email"
+                  name="team_member2_email"
                   required="required"
                   class="form-control"
                 />
@@ -167,8 +167,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="contact"
-                  name="contact"
+                  id="team_member2_contact"
+                  name="team_member2_contact"
                   required="required"
                   class="form-control"
                 />
@@ -181,12 +181,12 @@
                 >Team member 2 T-shirt<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="tshirt" name="tshirt">
+                <select class="form-control" id="team_member2_tshirt" name="team_member2_tshirt">
                   <option disabled>--- Choose option ---</option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
-                  <option value="x">XL</option>
+                  <option value="xl">XL</option>
                   <option value="xxl">XXL</option>
                   <option value="xxxl">XXXL</option>
                 </select>
@@ -201,8 +201,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="team_member3_name"
+                  name="team_member3_name"
                   required="required"
                   class="form-control"
                 />
@@ -217,8 +217,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="email"
-                  id="email"
-                  name="email"
+                  id="team_member3_email"
+                  name="team_member3_email"
                   required="required"
                   class="form-control"
                 />
@@ -233,8 +233,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="contact"
-                  name="contact"
+                  id="team_member3_contact"
+                  name="team_member3_contact"
                   required="required"
                   class="form-control"
                 />
@@ -247,12 +247,12 @@
                 >Team member 3 T-shirt<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="tshirt" name="tshirt">
+                <select class="form-control" id="team_member3_tshirt" name="team_member3_tshirt">
                   <option disabled>--- Choose option ---</option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
-                  <option value="x">XL</option>
+                  <option value="xl">XL</option>
                   <option value="xxl">XXL</option>
                   <option value="xxxl">XXXL</option>
                 </select>
@@ -267,8 +267,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="team_member4_name"
+                  name="team_member4_name"
                   class="form-control"
                 />
               </div>
@@ -282,8 +282,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="email"
-                  id="email"
-                  name="email"
+                  id="team_member4_email"
+                  name="team_member4_email"
                   class="form-control"
                 />
               </div>
@@ -297,8 +297,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="contact"
-                  name="contact"
+                  id="team_member4_contact"
+                  name="team_member4_contact"
                   class="form-control"
                 />
               </div>
@@ -310,12 +310,12 @@
                 >Team member 4 T-shirt
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="tshirt" name="tshirt">
+                <select class="form-control" id="team_member4_tshirt" name="team_member4_tshirt">
                   <option disabled>--- Choose option ---</option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
-                  <option value="x">XL</option>
+                  <option value="xl">XL</option>
                   <option value="xxl">XXL</option>
                   <option value="xxxl">XXXL</option>
                 </select>
@@ -330,8 +330,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="team_member5_name"
+                  name="team_member5_name"
                   class="form-control"
                 />
               </div>
@@ -345,8 +345,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="email"
-                  id="email"
-                  name="email"
+                  id="team_member5_email"
+                  name="team_member5_email"
                   class="form-control"
                 />
               </div>
@@ -360,8 +360,8 @@
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="contact"
-                  name="contact"
+                  id="team_member5_contact"
+                  name="team_member5_contact"
                   class="form-control"
                 />
               </div>
@@ -373,12 +373,12 @@
                 >Team member 5 T-shirt
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="tshirt" name="tshirt">
+                <select class="form-control" id="team_member5_tshirt" name="team_member5_tshirt">
                   <option disabled>--- Choose option ---</option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
-                  <option value="x">XL</option>
+                  <option value="xl">XL</option>
                   <option value="xxl">XXL</option>
                   <option value="xxxl">XXXL</option>
                 </select>

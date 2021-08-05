@@ -86,56 +86,56 @@ const postEditPC = async (req, res) => {
 
 const postRegisterPC = (req, res) => {
   console.log(req.body);
-  const { name, email, contact, institution, category, tshirt } = req.body;
-  let registrationFee = 0;
-  if (category == "school") {
-    registrationFee = 250;
-  } else if (category == "college") {
-    registrationFee = 400;
-  } else if (category == "university") {
-    registrationFee = 500;
-  }
+//   const { name, email, contact, institution, category, tshirt } = req.body;
+//   let registrationFee = 0;
+//   if (category == "school") {
+//     registrationFee = 250;
+//   } else if (category == "college") {
+//     registrationFee = 400;
+//   } else if (category == "university") {
+//     registrationFee = 500;
+//   }
 
-  const total = registrationFee;
-  const paid = 0;
-  const selected = false;
+//   const total = registrationFee;
+//   const paid = 0;
+//   const selected = false;
 
-  let message = "";
+//   let message = "";
 
-  MathOlympiad.findOne({ name: name, contact: contact }).then((participant) => {
-    if (participant) {
-      message = "Participant with this name and contact number already exist";
-      console.log(message);
-      req.flash("message", message);
-      res.redirect("/math_olympiad/register");
-    } else {
-      const participant = new MathOlympiad({
-        name,
-        email,
-        category,
-        contact,
-        institution,
-        paid,
-        total,
-        selected,
-        tshirt,
-      });
-      participant
-        .save()
-        .then(() => {
-          message = "Participants has been registered succesfully";
-          console.log(message);
-          req.flash("message", message);
-          res.redirect("/math_olympiad/register");
-        })
-        .catch(() => {
-          message = "Participant not registered";
-          console.log(message);
-          req.flash("message", message);
-          res.redirect("/math_olympiad/register");
-        });
-    }
-  });
+//   MathOlympiad.findOne({ name: name, contact: contact }).then((participant) => {
+//     if (participant) {
+//       message = "Participant with this name and contact number already exist";
+//       console.log(message);
+//       req.flash("message", message);
+//       res.redirect("/math_olympiad/register");
+//     } else {
+//       const participant = new MathOlympiad({
+//         name,
+//         email,
+//         category,
+//         contact,
+//         institution,
+//         paid,
+//         total,
+//         selected,
+//         tshirt,
+//       });
+//       participant
+//         .save()
+//         .then(() => {
+//           message = "Participants has been registered succesfully";
+//           console.log(message);
+//           req.flash("message", message);
+//           res.redirect("/math_olympiad/register");
+//         })
+//         .catch(() => {
+//           message = "Participant not registered";
+//           console.log(message);
+//           req.flash("message", message);
+//           res.redirect("/math_olympiad/register");
+//         });
+//     }
+//   });
 };
 
 const getListPC = (req, res) => {

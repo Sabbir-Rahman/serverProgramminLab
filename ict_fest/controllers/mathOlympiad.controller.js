@@ -86,7 +86,7 @@ const postEditMO = async (req, res) => {
 
 
 const postRegisterMO = (req, res) => {
-  console.log(req.body);
+ 
   const { name, email, contact, institution, category, tshirt } = req.body;
   let registrationFee = 0;
   if (category == "school") {
