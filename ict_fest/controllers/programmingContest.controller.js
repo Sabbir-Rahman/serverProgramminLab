@@ -243,17 +243,17 @@ const deletePC = (req, res) => {
 const paymentDonePC = (req, res) => {
   const id = req.params.id;
 
-  MathOlympiad.findOne({ _id: id }).then((participant) => {
+  ProgrammingContest.findOne({ _id: id }).then((participant) => {
     const total = participant.total;
-    MathOlympiad.findOneAndUpdate({ _id: id }, { paid: total }, (err) => {
+    ProgrammingContest.findOneAndUpdate({ _id: id }, { paid: total }, (err) => {
       if (err) {
         let message = "Data Could not been updated";
         req.flash("message", message);
-        res.redirect("/math_olympiad/list");
+        res.redirect("/programming_contest/list");
       } else {
         let message = "Payment complete succesfully";
         req.flash("message", message);
-        res.redirect("/math_olympiad/list");
+        res.redirect("/programming_contest/list");
       }
     });
   });
@@ -262,16 +262,16 @@ const paymentDonePC = (req, res) => {
 const selectParticipantPC = (req, res) => {
   const id = req.params.id;
 
-  MathOlympiad.findOne({ _id: id }).then((participant) => {
-    MathOlympiad.findOneAndUpdate({ _id: id }, { selected: true }, (err) => {
+  ProgrammingContest.findOne({ _id: id }).then((participant) => {
+    ProgrammingContest.findOneAndUpdate({ _id: id }, { selected: true }, (err) => {
       if (err) {
         let message = "Data Could not been updated";
         req.flash("message", message);
-        res.redirect("/math_olympiad/list");
+        res.redirect("/programming_contest/list");
       } else {
         let message = "Participant selected succesfully";
         req.flash("message", message);
-        res.redirect("/math_olympiad/list");
+        res.redirect("/programming_contest/list");
       }
     });
   });
