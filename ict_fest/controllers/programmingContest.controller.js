@@ -186,7 +186,7 @@ const postRegisterPC = (req, res) => {
 const getListPC = (req, res) => {
   let allParticipants = [];
   let message = "";
-  MathOlympiad.find()
+  ProgrammingContest.find()
     .then((data) => {
       allParticipants = data;
       res.render("programmingContest/list.ejs", {
