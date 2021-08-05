@@ -227,15 +227,15 @@ const editPC = (req, res) => {
 const deletePC = (req, res) => {
   let message = "";
   const id = req.params.id;
-  MathOlympiad.deleteOne({ _id: id }, (err) => {
+  ProgrammingContest.deleteOne({ _id: id }, (err) => {
     if (err) {
       message = "Failed to delete data";
       req.flash("message", message);
-      res.redirect("/math_olympiad/list");
+      res.redirect("/programming_contest/list");
     } else {
       message = "Data has been deleted succesfully";
       req.flash("message", message);
-      res.redirect("/math_olympiad/list");
+      res.redirect("/programming_contest/list");
     }
   });
 };
