@@ -14,7 +14,12 @@
         </div>
         <div class="x_content">
           <br />
-          
+          <% let success = "Participants has been registered succesfully"%>
+          <%if(message.length>0){if(message==success){%>
+          <div class="alert alert-success"><%=message%></div>
+          <%}else{%>
+          <div class="alert alert-danger"><%=message%></div>
+          <%}%> <%}%>
           <form
             method="POST"
             action="/math_olympiad/register"

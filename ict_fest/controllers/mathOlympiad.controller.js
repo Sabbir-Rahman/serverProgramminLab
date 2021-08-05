@@ -7,7 +7,7 @@ const getRegisterMO = (req, res) => {
 
 
 const getEditMO = (req, res) => {
-  res.render("mathOlympiad/edit.ejs");
+  res.render("mathOlympiad/edit.ejs", { message: req.flash("message") });
 };
 
 const postEditMO = (req, res) => {
@@ -89,6 +89,14 @@ const getListMO = (req, res) => {
     });
 };
 
+const editMO = (req, res) => {
+  let message = "";
+  const id = req.params.id;
+  req.flash("message", message);
+  res.redirect("/math_olympiad/edit_participant_form");
+  
+};
+
 const deleteMO = (req, res) => {
   let message = "";
   const id = req.params.id;
@@ -148,6 +156,7 @@ module.exports = {
   postRegisterMO,
   getListMO,
   deleteMO,
+  editMO,
   paymentDoneMO,
   selectParticipantMO,
   getEditMO,

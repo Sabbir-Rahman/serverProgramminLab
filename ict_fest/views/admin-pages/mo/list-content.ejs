@@ -98,7 +98,13 @@
                       <a href="<%= selectParticipantURL %>"
                         ><i class="fa fa-check"></i>
                         <span class="fa fa-chevron"></span></td>
-                    <td>Edit</td>
+                    <td>
+                      <% const editURL = 'edit/' +
+                      participant._id %>
+                      <a href="<%= editURL %>"
+                        >Edit
+                        </span>
+                    </td>
 
                     <td>
                       <% const deleteURL = 'delete/' +
