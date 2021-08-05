@@ -14,27 +14,75 @@ const getEditMO = (req, res) => {
 
 const postEditMO = async (req, res) => {
   let message = "";
-  const participant = req.body;
-  const {id:_id} = req.params
+  const { name, email, contact, institution, category, tshirt } = req.body;
+  const { id: _id } = req.params;
 
-  const updatedPost = await MathOlympiad.findByIdAndUpdate(
-    _id,
-    { ...participant, _id },
-    { new: true }
-  );
-  
-  if (updatedPost){
-    message = "Participant edit Succesfull";
-    req.flash("message", message);
-    res.redirect("/dashboard");
-  } else {
-    message = "Participant edit failed";
-    req.flash("message", message);
-    res.redirect("/dashboard");
+  let registrationFee = 0;
+  if (category == "school") {
+    registrationFee = 250;
+  } else if (category == "college") {
+    registrationFee = 400;
+  } else if (category == "university") {
+    registrationFee = 500;
   }
-  
+
+  const total = registrationFee;
+  const paid = 0;
+  const selected = false;
+
+  if (category) {
+    const updatedPost = await MathOlympiad.findByIdAndUpdate(
+      _id,
+      {
+        name: name,
+        email: email,
+        category: category,
+        contact: contact,
+        institution: institution,
+        paid: paid,
+        total: total,
+        selected: selected,
+        tshirt: tshirt,
+      },
+      { new: true }
+    )
+      .then(() => {
+        message = "Participant edit Succesfull";
+        req.flash("message", message);
+        res.redirect("/dashboard");
+      })
+      .catch(() => {
+        message = "Participant edit failed";
+        req.flash("message", message);
+        res.redirect("/dashboard");
+      });
+  } else {
+    const updatedPost = await MathOlympiad.findByIdAndUpdate(
+      _id,
+      {
+        name: name,
+        email: email,
+        contact: contact,
+        institution: institution,
+        paid: paid,
+        total: total,
+        selected: selected,
+        tshirt: tshirt,
+      },
+      { new: true }
+    )
+      .then(() => {
+        message = "Participant edit Succesfull";
+        req.flash("message", message);
+        res.redirect("/dashboard");
+      })
+      .catch(() => {
+        message = "Participant edit failed";
+        req.flash("message", message);
+        res.redirect("/dashboard");
+      });
+  }
 };
-  // res.render("mathOlympiad/edit.ejs");
 
 
 const postRegisterMO = (req, res) => {
