@@ -14,7 +14,8 @@
         </div>
         <div class="x_content">
           <br />
-          <% let success = "Participants has been registered succesfully"%>
+          <% console.log(participant[0]['name']) %>
+          <% let success = "Data fetch success now edit participant"%>
           <%if(message.length>0){if(message==success){%>
           <div class="alert alert-success"><%=message%></div>
           <%}else{%>
@@ -40,6 +41,7 @@
                   name="name"
                   required="required"
                   class="form-control"
+                  value="<%= participant[0]['name'] %>"
                 />
               </div>
             </div>
@@ -56,6 +58,8 @@
                   name="email"
                   required="required"
                   class="form-control"
+                  value="<%= participant[0]['email'] %>"
+            
                 />
               </div>
             </div>
@@ -72,6 +76,8 @@
                   name="contact"
                   required="required"
                   class="form-control"
+                  value="<%= participant[0]['contact']%>"
+                
                 />
               </div>
             </div>
@@ -88,6 +94,8 @@
                   name="institution"
                   required="required"
                   class="form-control"
+                  value="<%= participant[0]['institution'] %>"
+               
                 />
               </div>
             </div>
@@ -98,8 +106,8 @@
                 >Category<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="category" name="category">
-                  <option disabled>--- Choose option ---</option>
+                <select class="form-control" id="category" name="category" >
+                  <option value="<%= participant[0]['category']%>"><%= participant[0]['category']%></option>
                   <option value="school">School</option>
                   <option value="college">College</option>
                   <option value="university">University</option>
@@ -114,7 +122,7 @@
               </label>
               <div class="col-md-6 col-sm-6">
                 <select class="form-control" id="tshirt" name="tshirt">
-                  <option disabled>--- Choose option ---</option>
+                  <option value="<%= participant[0]['tshirt']%>"><%= participant[0]['tshirt']%></option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
@@ -129,7 +137,7 @@
             <div class="item form-group">
               <div class="col-md-6 col-sm-6 offset-md-3">
                 <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success">Edit</button>
               </div>
             </div>
           </form>

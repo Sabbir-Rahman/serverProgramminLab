@@ -7,7 +7,10 @@ const getRegisterMO = (req, res) => {
 
 
 const getEditMO = (req, res) => {
-  res.render("mathOlympiad/edit.ejs", { message: req.flash("message") });
+  res.render("mathOlympiad/edit.ejs", {
+    participant: req.flash("participant"),
+    message: req.flash("message")
+  });
 };
 
 const postEditMO = (req, res) => {
@@ -90,10 +93,26 @@ const getListMO = (req, res) => {
 };
 
 const editMO = (req, res) => {
+  
+  let participant = {};
   let message = "";
   const id = req.params.id;
-  req.flash("message", message);
-  res.redirect("/math_olympiad/edit_participant_form");
+  console.log(id)
+  MathOlympiad.findOne({ _id: id })
+  .then((data) => {
+    participant = data
+    message = "Data fetch success now edit participant";
+    req.flash("participant", participant);
+    req.flash("message", message);
+    res.redirect("/math_olympiad/edit_participant_form");
+  })
+  .catch((err) =>{
+    message = "Data fetch failed";
+    req.flash("message", message);
+    res.resnder('/dashboard')
+    console.log(err)
+  })
+  
   
 };
 
