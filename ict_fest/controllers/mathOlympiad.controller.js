@@ -39,9 +39,6 @@ const postEditMO = async (req, res) => {
         category: category,
         contact: contact,
         institution: institution,
-        paid: paid,
-        total: total,
-        selected: selected,
         tshirt: tshirt,
       },
       { new: true }
@@ -84,9 +81,7 @@ const postEditMO = async (req, res) => {
   }
 };
 
-
 const postRegisterMO = (req, res) => {
- 
   const { name, email, contact, institution, category, tshirt } = req.body;
   let registrationFee = 0;
   if (category == "school") {

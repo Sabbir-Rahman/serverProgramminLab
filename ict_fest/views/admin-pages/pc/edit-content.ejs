@@ -14,13 +14,14 @@
         </div>
         <div class="x_content">
           <br />
-          
-          <% let success = "Data fetch success now edit participant"%>
+          <% let success = "Data fetch success now edit participant"%> <%
+          console.log(participant)%>
           <%if(message.length>0){if(message==success){%>
           <div class="alert alert-success"><%=message%></div>
           <%}else{%>
           <div class="alert alert-danger"><%=message%></div>
           <%}%> <%}%>
+
           <% const URL = 'edit_participant_form/' +
                       participant[0]['_id'] %>
           <form
@@ -34,52 +35,16 @@
               <label
                 class="col-form-label col-md-3 col-sm-3 label-align"
                 for="name"
-                >Name<span class="required">*</span>
+                >Team Name<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="team_name"
+                  name="team_name"
                   required="required"
                   class="form-control"
-                  value="<%= participant[0]['name'] %>"
-                />
-              </div>
-            </div>
-            <div class="item form-group">
-              <label
-                class="col-form-label col-md-3 col-sm-3 label-align"
-                for="email"
-                >Email<span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required="required"
-                  class="form-control"
-                  value="<%= participant[0]['email'] %>"
-            
-                />
-              </div>
-            </div>
-            <div class="item form-group">
-              <label
-                class="col-form-label col-md-3 col-sm-3 label-align"
-                for="contact"
-                >Contact No<span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6">
-                <input
-                  type="text"
-                  id="contact"
-                  name="contact"
-                  required="required"
-                  class="form-control"
-                  value="<%= participant[0]['contact']%>"
-                
+                  value="<%= participant[0]['team_name'] %>"
                 />
               </div>
             </div>
@@ -97,37 +62,379 @@
                   required="required"
                   class="form-control"
                   value="<%= participant[0]['institution'] %>"
-               
                 />
               </div>
             </div>
-            <%if(participant[0]['paid']!=participant[0]['total']){%>
-              <div class="item form-group">
+            <div class="item form-group">
               <label
                 class="col-form-label col-md-3 col-sm-3 label-align"
-                for="category"
-                >Category<span class="required">*</span>
+                for="name"
+                >Team Lead Name<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="category" name="category" >
-                  <option value="<%= participant[0]['category']%>"><%= participant[0]['category']%></option>
-                  <option value="school">School</option>
-                  <option value="college">College</option>
-                  <option value="university">University</option>
-                </select>
+                <input
+                  type="text"
+                  id="team_lead_name"
+                  name="team_lead_name"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_lead_name'] %>"
+                />
               </div>
             </div>
-            <%}%>
-            
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="email"
+                >Team Lead Email<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="email"
+                  id="team_lead_email"
+                  name="team_lead_email"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_lead_email'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="contact"
+                >Team Lead Contact No<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_lead_contact"
+                  name="team_lead_contact"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_lead_contact'] %>"
+                />
+              </div>
+            </div>
             <div class="item form-group">
               <label
                 class="col-form-label col-md-3 col-sm-3 label-align"
                 for="tshirt"
-                >T-shirt<span class="required">*</span>
+                >Team Lead T-shirt<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="tshirt" name="tshirt">
-                  <option value="<%= participant[0]['tshirt']%>"><%= participant[0]['tshirt']%></option>
+                <select
+                  class="form-control"
+                  id="team_lead_tshirt"
+                  name="team_lead_tshirt"
+                >
+                  <option value="<%= participant[0]['team_lead_tshirt'] %>">
+                    <%= participant[0]['team_lead_tshirt']%>
+                  </option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                  <option value="xl">XL</option>
+                  <option value="xxl">XXL</option>
+                  <option value="xxxl">XXXL</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="name"
+                >Team member 2 Name<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_member2_name"
+                  name="team_member2_name"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_member2_name'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="email"
+                >Team member 2 Email<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="email"
+                  id="team_member2_email"
+                  name="team_member2_email"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_member2_email'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="contact"
+                >Team member 2 Contact No<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_member2_contact"
+                  name="team_member2_contact"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_member2_contact'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="tshirt"
+                >Team member 2 T-shirt<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <select
+                  class="form-control"
+                  id="team_member2_tshirt"
+                  name="team_member2_tshirt"
+                >
+                  <option
+                    value="value="
+                    value="<%= participant[0]['team_member2_tshirt'] %>"
+                    %
+                  >
+                    <%= participant[0]['team_member2_tshirt']%>
+                  </option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                  <option value="xl">XL</option>
+                  <option value="xxl">XXL</option>
+                  <option value="xxxl">XXXL</option>
+                </select>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="name"
+                >Team member 3 Name<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_member3_name"
+                  name="team_member3_name"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_member3_name'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="email"
+                >Team member 3 Email<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="email"
+                  id="team_member3_email"
+                  name="team_member3_email"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_member3_email'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="contact"
+                >Team member 3 Contact No<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_member3_contact"
+                  name="team_member3_contact"
+                  required="required"
+                  class="form-control"
+                  value="<%= participant[0]['team_member3_contact'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="tshirt"
+                >Team member 3 T-shirt<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <select
+                  class="form-control"
+                  id="team_member3_tshirt"
+                  name="team_member3_tshirt"
+                >
+                  <option value="<%= participant[0]['team_mmeber3_tshirt']%>">
+                    <%= participant[0]['team_member3_tshirt']%>
+                  </option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                  <option value="xl">XL</option>
+                  <option value="xxl">XXL</option>
+                  <option value="xxxl">XXXL</option>
+                </select>
+              </div>
+            </div>
+            <div class="item form-group">
+              <div class="col-form-label col-md-3 col-sm-3 label-align">
+                <b>Extra team members(optional)</b>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="name"
+                >Team member 4 Name
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_member4_name"
+                  name="team_member4_name"
+                  class="form-control"
+                  value="<%= participant[0]['team_member4_name'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="email"
+                >Team member 4 Email
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="email"
+                  id="team_member4_email"
+                  name="team_member4_email"
+                  class="form-control"
+                  value="<%= participant[0]['team_member4_email'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="contact"
+                >Team member 4 Contact No
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_member4_contact"
+                  name="team_member4_contact"
+                  class="form-control"
+                  value="<%= participant[0]['team_member4_contact'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="tshirt"
+                >Team member 4 T-shirt
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <select
+                  class="form-control"
+                  id="team_member4_tshirt"
+                  name="team_member4_tshirt"
+                >
+                  <option value="<%= participant[0]['team_member4_tshirt']%>">
+                    <%= participant[0]['team_member4_tshirt']%>
+                  </option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                  <option value="xl">XL</option>
+                  <option value="xxl">XXL</option>
+                  <option value="xxxl">XXXL</option>
+                </select>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="name"
+                >Team member 5 Name
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_member5_name"
+                  name="team_member5_name"
+                  class="form-control"
+                  value="<%= participant[0]['team_member5_name'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="email"
+                >Team member 5 Email
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="email"
+                  id="team_member5_email"
+                  name="team_member5_email"
+                  class="form-control"
+                  value="<%= participant[0]['team_member5_email'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="contact"
+                >Team member 5 Contact No
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <input
+                  type="text"
+                  id="team_member5_contact"
+                  name="team_member5_contact"
+                  class="form-control"
+                  value="<%= participant[0]['team_member5_contact'] %>"
+                />
+              </div>
+            </div>
+            <div class="item form-group">
+              <label
+                class="col-form-label col-md-3 col-sm-3 label-align"
+                for="tshirt"
+                >Team member 5 T-shirt
+              </label>
+              <div class="col-md-6 col-sm-6">
+                <select
+                  class="form-control"
+                  id="team_member5_tshirt"
+                  name="team_member5_tshirt"
+                >
+                  <option value="<%= participant[0]['team_member5_tshirt']%>">
+                    <%= participant[0]['team_member5_tshirt']%>
+                  </option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
@@ -142,7 +449,7 @@
             <div class="item form-group">
               <div class="col-md-6 col-sm-6 offset-md-3">
                 <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="submit" class="btn btn-success">Edit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
               </div>
             </div>
           </form>
