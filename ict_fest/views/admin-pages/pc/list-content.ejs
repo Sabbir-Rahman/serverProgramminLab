@@ -41,12 +41,29 @@
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Contact</th>
-                    <th>Category</th>
+                    <th>Team Name</th>
                     <th>Institution</th>
-                    <th>T-shirt</th>
+                    <th>Team Lead Name</th>
+                    <th>Team Lead Email</th>
+                    <th>Team Lead Contact</th>
+                    <th>Team Lead T-Shirt</th>
+                    <th>Team Member2 Name</th>
+                    <th>Team Member2 Email</th>
+                    <th>Team Member2 Contact</th>
+                    <th>Team Member2 T-Shirt</th>
+                    <th>Team Member3 Name</th>
+                    <th>Team Member3 Email</th>
+                    <th>Team Member3 Contact</th>
+                    <th>Team Member3 T-Shirt</th>
+                    <th>Team Member4 Name</th>
+                    <th>Team Member4 Email</th>
+                    <th>Team Member4 Contact</th>
+                    <th>Team Member4 T-Shirt</th>
+                    <th>Team Member5 Name</th>
+                    <th>Team Member5 Email</th>
+                    <th>Team Member5 Contact</th>
+                    <th>Team Member5 T-Shirt</th>
+                    <th>Date</th>
                     <th>Total</th>
                     <th>Paid</th>
                     <th>Selected</th>
@@ -61,12 +78,29 @@
                   <% if(participants.length>0){
                   participants.forEach(participant=>{%>
                   <tr>
-                    <td><%= participant.name %></td>
-                    <td><%= participant.email %></td>
-                    <td><%= participant.contact %></td>
-                    <td><%= participant.category %></td>
+                    <td><%= participant.team_name %></td>
                     <td><%= participant.institution %></td>
-                    <td><%= participant.tshirt %></td>
+                    <td><%= participant.team_lead_name %></td>
+                    <td><%= participant.team_lead_email %></td>
+                    <td><%= participant.team_lead_contact %></td>
+                    <td><%= participant.team_lead_tshirt %></td>
+                    <td><%= participant.team_member2_name %></td>
+                    <td><%= participant.team_member2_email %></td>
+                    <td><%= participant.team_member2_contact %></td>
+                    <td><%= participant.team_member2_tshirt %></td>
+                    <td><%= participant.team_member3_name %></td>
+                    <td><%= participant.team_member3_email %></td>
+                    <td><%= participant.team_member3_contact %></td>
+                    <td><%= participant.team_member3_tshirt %></td>
+                    <td><%= participant.team_member4_name %></td>
+                    <td><%= participant.team_member4_email %></td>
+                    <td><%= participant.team_member4_contact %></td>
+                    <td><%= participant.team_member4_tshirt %></td>
+                    <td><%= participant.team_member5_name %></td>
+                    <td><%= participant.team_member5_email %></td>
+                    <td><%= participant.team_member5_contact %></td>
+                    <td><%= participant.team_member5_tshirt %></td>
+                    <td><%= participant.date %></td>
                     <td><%= participant.total %></td>
                     <td><%= participant.paid %></td>
                     <td>

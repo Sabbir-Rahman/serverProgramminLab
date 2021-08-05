@@ -15,9 +15,17 @@
         <div class="x_content">
           <br />
           
+          <% let success = "Data fetch success now edit participant"%>
+          <%if(message.length>0){if(message==success){%>
+          <div class="alert alert-success"><%=message%></div>
+          <%}else{%>
+          <div class="alert alert-danger"><%=message%></div>
+          <%}%> <%}%>
+          <% const URL = 'edit_participant_form/' +
+                      participant[0]['_id'] %>
           <form
             method="POST"
-            action="/math_olympiad/register"
+            action="<%= URL %>" 
             id="demo-form2"
             data-parsley-validate
             class="form-horizontal form-label-left"
@@ -35,6 +43,7 @@
                   name="name"
                   required="required"
                   class="form-control"
+                  value="<%= participant[0]['name'] %>"
                 />
               </div>
             </div>
@@ -51,6 +60,8 @@
                   name="email"
                   required="required"
                   class="form-control"
+                  value="<%= participant[0]['email'] %>"
+            
                 />
               </div>
             </div>
@@ -67,6 +78,8 @@
                   name="contact"
                   required="required"
                   class="form-control"
+                  value="<%= participant[0]['contact']%>"
+                
                 />
               </div>
             </div>
@@ -83,24 +96,29 @@
                   name="institution"
                   required="required"
                   class="form-control"
+                  value="<%= participant[0]['institution'] %>"
+               
                 />
               </div>
             </div>
-            <div class="item form-group">
+            <%if(participant[0]['paid']!=participant[0]['total']){%>
+              <div class="item form-group">
               <label
                 class="col-form-label col-md-3 col-sm-3 label-align"
                 for="category"
                 >Category<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6">
-                <select class="form-control" id="category" name="category">
-                  <option disabled>--- Choose option ---</option>
+                <select class="form-control" id="category" name="category" >
+                  <option value="<%= participant[0]['category']%>"><%= participant[0]['category']%></option>
                   <option value="school">School</option>
                   <option value="college">College</option>
                   <option value="university">University</option>
                 </select>
               </div>
             </div>
+            <%}%>
+            
             <div class="item form-group">
               <label
                 class="col-form-label col-md-3 col-sm-3 label-align"
@@ -109,11 +127,11 @@
               </label>
               <div class="col-md-6 col-sm-6">
                 <select class="form-control" id="tshirt" name="tshirt">
-                  <option disabled>--- Choose option ---</option>
+                  <option value="<%= participant[0]['tshirt']%>"><%= participant[0]['tshirt']%></option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
-                  <option value="x">XL</option>
+                  <option value="xl">XL</option>
                   <option value="xxl">XXL</option>
                   <option value="xxxl">XXXL</option>
                 </select>
@@ -124,7 +142,7 @@
             <div class="item form-group">
               <div class="col-md-6 col-sm-6 offset-md-3">
                 <button class="btn btn-primary" type="reset">Reset</button>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success">Edit</button>
               </div>
             </div>
           </form>

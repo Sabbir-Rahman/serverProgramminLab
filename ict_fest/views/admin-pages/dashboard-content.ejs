@@ -1,5 +1,11 @@
 <div class="right_col" role="main">
   <!-- top tiles -->
+  <% let success = "Participant edit Succesfull"%>
+  <%if(message.length>0){if(message==success){%>
+  <div class="alert alert-success"><%=message%></div>
+  <%}else{%>
+  <div class="alert alert-danger"><%=message%></div>
+  <%}%> <%}%>
   <div class="row" style="display: inline-block">
     <div class="tile_count">
       <div class="col-md-3 col-sm-4 tile_stats_count">
