@@ -56,10 +56,12 @@ app.use(passport.session())
 const indexRoutes = require('./routes/index.routes')
 const userRoutes = require('./routes/user.routes')
 const moRoutes = require('./routes/mathOlympiad.routes')
+const pcRoutes = require('./routes/programmingContest.routes')
 
 app.use(indexRoutes)
 app.use("/users",userRoutes)
 app.use("/math_olympiad",moRoutes)
+app.use("/programming_contest", pcRoutes)
 
 
 module.exports = app
