@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
 const passport = require('passport')
+const nodemailer = require('nodemailer')
 
 //Passport Strategy
 require('./config/passport')(passport)
@@ -13,6 +14,31 @@ const session = require('express-session')
 const flash = require('connect-flash')
 
 
+//email send
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  tls: {
+    rejectUnauthorized: false,
+  },
+  auth: {
+    user: 'kishanecomm@gmail.com',
+    pass: '*********'
+  },
+});
+
+transporter.sendMail({
+  from:'kishanecomm@gmail.com',
+  to:'sabbirrahman42@iut-dhaka.edu',
+  subject:'Test mail',
+  text: 'This is test message'
+},(error, response)=>{
+  if(error){
+    console.log('Error',error)
+  }
+  else{
+    console.log('Mail sent, ',response)
+  }
+})
 
 //mongodb connect
 
