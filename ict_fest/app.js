@@ -13,12 +13,9 @@ require('./config/passport')(passport)
 const session = require('express-session')
 const flash = require('connect-flash')
 
-const email = require('./controllers/email.controller')
+const wrapper = require('./controllers/wrapper')
 
 
-//mongodb connect
-
-email.sendEmail('sabbirrahman42@iut-dhaka.edu','function test','This is called from function')
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
 

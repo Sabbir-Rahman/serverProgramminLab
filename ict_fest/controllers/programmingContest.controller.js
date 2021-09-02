@@ -1,5 +1,5 @@
 //getRegisterPC,postRegisterPC,getListPC,deletePC
-
+const { sendEmail, hashPassword } = require("./wrapper");
 const ProgrammingContest = require("../models/ProgrammingContest.model");
 const getRegisterPC = (req, res) => {
   res.render("programmingContest/register.ejs", {
@@ -163,8 +163,30 @@ const postRegisterPC = (req, res) => {
       });
       participant
         .save()
-        .then(() => {
+        .then(object => {
           message = "Participants has been registered succesfully";
+          const hashId = hashPassword(object.id);
+          const subject = "Register for ICT fest";
+          
+          const text1 = `Hello,\n\n${team_lead_name}. Thanks for registering in ICT fest for programming contest.\nYour key is ${hashId} .\nDon't forget it`;
+          sendEmail(team_lead_email, subject, text1);
+
+          const text2 = `Hello,\n\n${team_member2_name}. Thanks for registering in ICT fest for programming contest.\nYour key is ${hashId} .\nDon't forget it`;
+          sendEmail(team_member2_email, subject, text2);
+
+          const text3 = `Hello,\n\n${team_member3_name}. Thanks for registering in ICT fest for programming contest.\nYour key is ${hashId} .\nDon't forget it`;
+          sendEmail(team_member3_email, subject, text3);
+          
+          if (team_member4_email != ''){
+            const text4 = `Hello,\n\n${team_member4_name}. Thanks for registering in ICT fest for programming contest.\nYour key is ${hashId} .\nDon't forget it`;
+            sendEmail(team_member4_email, subject, text4);
+          }
+
+          if (team_member5_email != "") {
+            const text5 = `Hello,\n\n${team_member5_name}. Thanks for registering in ICT fest for programming contest.\nYour key is ${hashId} .\nDon't forget it`;
+            sendEmail(team_member5_email, subject, text5);
+          }
+
           console.log(message);
           req.flash("message", message);
           res.redirect("/programming_contest/register");

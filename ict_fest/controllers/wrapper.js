@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const nodemailer = require("nodemailer");
+const bcrypt = require('bcryptjs');
 
 
 
@@ -34,4 +35,9 @@ function sendEmail (to,subject,text) {
   );
 }
 
-module.exports = {sendEmail}
+function hashPassword(text){
+  const passwordHash = bcrypt.hashSync(text, 10);
+  return passwordHash  
+}
+
+module.exports = {sendEmail,hashPassword}

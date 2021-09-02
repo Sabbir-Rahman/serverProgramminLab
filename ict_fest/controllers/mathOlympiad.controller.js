@@ -1,6 +1,7 @@
 //getRegisterMO,postRegisterMO,getListMO,deleteMO
 
 const MathOlympiad = require("../models/MathOlympiad.model");
+const { sendEmail, hashPassword } = require("./wrapper");
 const getRegisterMO = (req, res) => {
   res.render("mathOlympiad/register.ejs", { message: req.flash("message") });
 };
@@ -118,9 +119,12 @@ const postRegisterMO = (req, res) => {
       });
       participant
         .save()
-        .then(() => {
+        .then(object => {
           message = "Participants has been registered succesfully";
-          console.log(message);
+          const hashId = hashPassword(object.id)
+          const subject = 'Register for ICT fest'
+          const text = `Hello,\n\n${name}. Thanks for registering in ICT fest for math olympiad.\nYour key is ${hashId} .\nDon't forget it`
+          sendEmail(email,subject,text)
           req.flash("message", message);
           res.redirect("/math_olympiad/register");
         })
